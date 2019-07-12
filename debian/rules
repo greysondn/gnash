@@ -44,7 +44,7 @@ CONFIGURE_FLAGS = \
 		--enable-cygnal \
 		--enable-python \
 		--enable-media=ffmpeg \
-		--enable-gui=gtk,qt4,dump \
+		--enable-gui=gtk,qt4,dump,sdl \
 		--enable-renderer=agg,cairo \
 		--enable-docbook \
 		--enable-extensions=fileio,lirc,mysql \

@@ -78,6 +78,25 @@ Description: GNU Shockwave Flash (SWF) player - Common files/libraries
  socket, and parse the incoming XML message. This lets an animation be a remote
  control for other devices or applications.
 
+Package: sdl-gnash
+Architecture: any
+Depends: gnash (>= 0.8.11)
+Description: GNU Shockwave Flash (SWF) player
+ GNU Gnash is a free GPL'd SWF player. It runs as a standalone application
+ on either the desktop or embedded devices, or may be used as a plugin
+ for several popular browsers. It supports playing media from a disk or
+ streaming over a network connection.
+ .
+ GNU Gnash is based on GameSWF and supports most SWF v7 features and some
+ SWF v8 and v9. SWF v10 is not supported by GNU Gnash.
+ .
+ Included in the Gnash is an XML based messaging system, as specified in
+ the SWF specification. This lets a SWF animation communicate over a TCP/IP
+ socket, and parse the incoming XML message. This lets an animation be a remote
+ control for other devices or applications.
+ .
+ This package includes the standalone sdl-based player.
+
 Package: gnash
 Architecture: any
 Depends: gnash-common (= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends}
