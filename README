@@ -3,3 +3,7 @@ This is just here so that I can log changes I made to get the SDL build for Ubun
 Please refer any hopes and dreams you have to upstream from here.
 
 https://github.com/strk/gnash
+
+The debian folder in the project root was taken from ubuntu's source. You can find the upstream here. (Specifically, 0.8.11~git20160608-1.4)
+
+https://packages.ubuntu.com/source/bionic/gnash
