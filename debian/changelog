@@ -1,3 +1,10 @@
+gnash (0.8.11~git20160608-1.4tinatos2) bionic; urgency=medium
+
+  * Fix a bad requirement, sorry it wouldn't install before
+  * Simplify build a bit, will start axing build requirements in the future
+
+ -- J.Dorian Greyson L. <greysondn@gmail.com>  Sat, 13 Jul 2019 06:29:24 -0400
+
 gnash (0.8.11~git20160608-1.4tinatos1) bionic; urgency=medium
 
   * Just gets a build going, basically. Probably has real problems.
