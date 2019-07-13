@@ -41,15 +41,11 @@ CONFIGURE_FLAGS = \
 		--without-swfdec-testsuite \
 		--disable-dependency-tracking \
 		--disable-rpath \
-		--enable-cygnal \
-		--enable-python \
+                --disable-plugins \
 		--enable-media=ffmpeg \
-		--enable-gui=gtk,qt4,dump,sdl \
+		--enable-gui=gtk,sdl \
 		--enable-renderer=agg,cairo \
-		--enable-docbook \
 		--enable-extensions=fileio,lirc,mysql \
-		--with-npapi-plugindir=/usr/lib/gnash \
-		--with-plugins-install=system \
 		--enable-shared=yes \
 		--without-gconf \
 		--without-ming

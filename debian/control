@@ -60,7 +60,7 @@ Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-flash/gnash.git
 
 Package: sdl-gnash
 Architecture: any
-Depends: gnash (>= 0.8.11), ${misc:Depends}, ${shlibs:Depends}
+Depends: gnash, ${misc:Depends}, ${shlibs:Depends}
 Description: GNU Shockwave Flash (SWF) player
  GNU Gnash is a free GPL'd SWF player. It runs as a standalone application
  on either the desktop or embedded devices, or may be used as a plugin
