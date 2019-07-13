@@ -1,0 +1,1383 @@
+Description: Quilt is awful, here's the requisite patch for source shipping
+
+ gnash (0.8.11~git20160608-1.4tinatos1) unstable; urgency=medium
+ .
+   * Just gets a build going, basically. Probably has real problems.
+Author: J. Dorian Greyson L. <greysondn@gmail.com>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: https://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: 2019-07-13
+
+--- gnash-0.8.11~git20160608.orig/README
++++ gnash-0.8.11~git20160608/README
+@@ -1,218 +1,9 @@
++This is just here so that I can log changes I made to get the SDL build for Ubuntu up and going for PPA.
+ 
+-	            Gnash: the GNU SWF Player
++Please refer any hopes and dreams you have to upstream from here.
+ 
+-Gnash is a player for animated "movies" in the Macromedia Shockwave Flash
+-(SWF) format.  It can be run as a graphical application, as a Web browser
+-plugin, or as a library used by other programs.  It is not yet complete;
+-it does not correctly handle every SWF file.
++https://github.com/strk/gnash
+ 
+-This is the README file for the Gnash-0.8.8 release (or snapshot).
+-
+-Gnash is originally based on the code of GameSWF, by Thatcher Ulrich.
+-GameSWF was the most advanced among free SWF players; it implemented a
+-fairly broad set of SWF Format v7 features.  In December 2005, Rob
+-Savoye (then one of the GameSWF developers) forked GameSWF to become
+-Gnash.  New improvements added to Gnash are copyrighted by the Free
+-Software Foundation under the GNU General Public License.  After Rob
+-rearranged the GameSWF code into the GNU project style, he began
+-development on the browser plugins.  The Free Software Foundation made
+-Gnash a priority project, and many volunteers started contributing
+-useful improvements.  We thank Thatcher Ulrich for the great start,
+-Rob Savoye and John Gilmore for organizing the project, and the Gnash
+-volunteers for making Gnash what it is today.
+-
+-SWF Support:
+---------------
+-
+-Many SWF movies play fine in Gnash.  Many others do not.  Occasionally, 
+-SWF movies that are used for browser navigation may fail. Almost all
+-SWF-based web-site navigation should work.
+-
+-Gnash supports practically all SWF opcodes and most ActionScript classes up
+-to SWF version 9. There is currently no real support for ActionScript
+-3 (ABC blocks) and AVM2, which were introduced in SWF version
+-9. Despite this, Gnash can play most SWF8 and many SWF9 movies,
+-because not all rely on unimplemented features.
+-
+-All unimplemented opcodes and ActionScript methods should print a warning
+-when using -vv with gnash or gprocessor. Running gprocessor -vv is often an
+-easy way to see why a movie isn't playing correctly.
+-
+-Plugin:	
+--------
+-
+-The plugin can play SWF files in cooperation with the browser.
+-It works with any browser that supports Mozilla's NPAPI plugin interface.
+-Gnash is know to work with Mozilla, Firefox, Iceweasel, Icecat, Konqueror,
+-Epiphany, Galeon, Opera, SeaMonkey, Midori and Chromium.
+-Gnash runs equally well in 32-bit and 64-bit environments.
+-
+-Configure with --with-plugindir= to set the directory that "make
+-install-plugin" will install the plugin in. By default it will be installed
+-in the user's .mozilla/plugins directory, even if you install using
+-sudo.
+-
+-Platforms Supported:
+---------------------
+-
+-Gnash has been ported to a wide variety of hardware and operating
+-systems. Primary platforms that get the most support are most of
+-the GNU/Linux distributions, but Ubuntu, Fedora, and Debian primarily.
+-Gnash is known to run on most BSD derived systems as well. There are
+-also ports to Beos, Haiku, OS/2, Irix, Solaris, Sylllable, and
+-OpenEmbedded.
+-
+-There are also ports of the standalone player to Darwin and
+-Win32. Both require adding the dependent libraries Gnash needs. Work
+-has started on a native Darwin (Aqua/Carbon/OpenGL) GUI so most of
+-these packages won't be required. The win32 player can be built with
+-Mingw32 and ought to be compilable with VC++ (but this has not been
+-confirmed recently). 
+-
+-Gnash has also been ported to a variety of embedded devices, most
+-running variations of OpenEmbedded. These include several custom
+-hardware platforms aimed at educational software for children. Better
+-known devices are the Sharp Zaurus family of PDAs (reflashed to run Open
+-Zaurus), the Nokia Internet Tablets (770 / 800 / 810), the OLPC and the
+-Pepper Pad 3, the latter two running a trimmed down Fedora.
+-
+-Gnash has been known to run on these 64-bit systems: the Itanium,
+-UltraSparc, PowerPC, AMD64, MIPS. Embedded processors include several
+-ARM variants, MIPS, and the Geode LX/GX.
+-
+-Building Gnash:
+----------------
+-
+-See the generic installation instructions in the file called "INSTALL".
+-(If you are building from a fresh git checkout, first see the file
+-"README.git" for additional instructions.)
+-
+-Depending on chosen functionality, CPU architecture, and OS the temporary
+-files needed when Gnash compiles require as much as 1 GB of storage space.
+-Approximately 400MB of virtual memory(RAM + swap) is also needed for linking.
+-After installation, the temporary files may be removed with "make clean".
+-
+-Gnash has three main options: choice of renderer (graphics library used
+-to render the SWF movie), choice(s) of GUI toolkit (gtk, qt4, etc), and choice
+-of multimedia backend (audio and video decoder).
+-
+-Gnash supports multiple renderers. By default it'll build them all in
+-the rendering library, or you can select which ones you want:
+-
+-   --enable-renderer=opengl
+-   --enable-renderer=cairo
+-   --enable-renderer=agg
+-or --enable-renderer=all (default)
+-
+-Gnash can use different multimedia back-ends for sound and/or
+-video. By default it'll build both FFmpeg and Gstreamer, which you
+-can select at runtime. To select only one media handler use:
+-
+-   --enable-media=GST			Gstreamer (default)
+-or --enable-media=ffmpeg		FFmpeg
+-
+-In some countries, the codecs needed to display audio and video are patented.
+-The FFmpeg library implements these codecs.  If you link them directly into
+-Gnash, you will create an executable which contains patented software and
+-requires a license for redistribution in those countries.  If, instead,
+-you build using gstreamer, the user installs the codecs of their choice.
+-
+-Gnash supports multiple graphics toolkits, and will build multiple
+-executables:
+-
+-   --enable-gui=gtk
+-   --enable-gui=qt4
+-or --enable-gui=gtk,qt4 (default)
+-
+-Other guis: dump, raw framebuffer, fltk, kde3, qt4, gtk, sdl, qtopia,
+-hildon, alp, riscos, aqua. Some guis are very specialized (dump writes
+-out raw frames to a disk file). Other guis are not very well supported
+-and may not even compile (aqua). 
+-
+-Different options will cause gnash to require different libraries.  The
+-configure script does a good job of telling you how to get these libraries.
+-
+-The GTK support is the most developed and featureful, while the SDL
+-support has fewer dependencies on other packages. The AGG backend
+-gives better quality results, and works on devices with only a
+-framebuffer.  Performance is better with the OpenGL backend, but
+-only if an accelerated graphics driver installed. This may require the
+-use of a non-free driver, so it's not for everyone. 
+-
+-Other required packages are libjpeg.
+-
+-If gettext support is installed, or is present in the standard C library,
+-gnash will support translation of its messages into other
+-languages. Boost is also required, as Gnash uses it for portable
+-mutexes and threading.
+-
+-If you select gstreamer as the media backend, gnash requires version 0.10
+-because earlier versions wouldn't let you insert clips into an existing
+-sound stream, as Gnash needs to do. If you compile gnash to use
+-Gstreamer, users who want to view Flash videos while running gnash 
+-will need to install the FFmpeg plugin for gstreamer. Flash uses
+-MPEG4, MP3, FLV, ACC, and Sorenson primarily. Gnash supports any codec
+-supported by FFmpeg and Gstreamer.
+-
+-Building the Gnash plugin for browsers:
+---------------------------------------
+-
+-The plugin is automatically built, but is installed only when you
+-say "make install-plugins". Installation target is controlled
+-by a configure switch: --with-plugins-install=system|user|prefix.
+-
+-By default, the policy is 'user', which means the plugins will
+-be installed for the sole user running 'make install-plugins'.
+-Keep this in mind as you likely don't want to install plugins
+-only for the root user...
+-
+-To build Klash, the Konqueror plugin, you need to have the KDE
+-development packages installed. This now installs a Qt executable
+-called "qt4-gnash" that is used by this plugin.
+-
+-The Gnash Community:
+---------------------
+-
+-Gnash has three mailing lists hosted at gnu.org. Archives of these
+-lists are stored at http://mail.gnu.org/pipermail/: 
+-
+-    * gnash-dev@gnu.org is for discussion of gnash development,
+-      porting to new platforms, ideas for the future. This is where
+-      the nitty-gritty gets discussed about Gnash, and is the best
+-      list for technical questions. To subscribe, go to
+-      http://mail.gnu.org/mailman/listinfo/gnash-dev 
+-    * gnash@gnu.org is a moderated list for announcements. New releases are
+-      announced here. To subscribe, go to
+-      http://mail.gnu.org/mailman/listinfo/gnash and register. Volume is
+-      typically very low.
+-    * gnash-commit@gnu.org is where summaries of changes committed to
+-      the git repository are automatically posted. Register at
+-      http://mail.gnu.org/mailman/listinfo/gnash-commit to be informed of
+-      these changes as they happen. Volume may be high.
+-      
+-
+-IRC:
+-    * #gnash on irc.freenode.net The #gnash channel on irc.freenode.net is 
+-      where many of the developers hang out.
+-
+-If you would like a new feature to be included in future versions of
+-Gnash, please send a request to <gnash-dev@gnu.org>. You can also
+-submit patches at https://savannah.gnu.org/patch/?group=gnash.
+-
+-Please remember that development of Gnash is a volunteer effort.
+-You can contribute to its development. The Gnash project would like to
+-find volunteers to focus on win32 and Darwin support, as well as help
+-us fill in missing functionality. Offers of help can be sent to
+-<gnash-dev@gnu.org>.
+-
+-For information about contributing to the GNU Project, please read How
+-to help GNU at <http://www.gnu.org/help/help.html>.
+-
+-If you think you have found a bug in Gnash, then
+-you should file as complete a report as possible at
+-https://savannah.gnu.org/bugs/?group=gnash.  Please include the operating
+-system name and version, and which gnash version you are using, in your
+-bug reports. Please try to reproduce your bug reports with the most
+-recent version of Gnash in git, as bugs are fixed there that may be
+-broken in a standard release.
++The debian folder in the project root was taken from ubuntu's source. You can find the upstream here. (Specifically, 0.8.11~git20160608-1.4)
+ 
++https://packages.ubuntu.com/source/bionic/gnash
+--- /dev/null
++++ gnash-0.8.11~git20160608/README.upstream
+@@ -0,0 +1,218 @@
++
++	            Gnash: the GNU SWF Player
++
++Gnash is a player for animated "movies" in the Macromedia Shockwave Flash
++(SWF) format.  It can be run as a graphical application, as a Web browser
++plugin, or as a library used by other programs.  It is not yet complete;
++it does not correctly handle every SWF file.
++
++This is the README file for the Gnash-0.8.8 release (or snapshot).
++
++Gnash is originally based on the code of GameSWF, by Thatcher Ulrich.
++GameSWF was the most advanced among free SWF players; it implemented a
++fairly broad set of SWF Format v7 features.  In December 2005, Rob
++Savoye (then one of the GameSWF developers) forked GameSWF to become
++Gnash.  New improvements added to Gnash are copyrighted by the Free
++Software Foundation under the GNU General Public License.  After Rob
++rearranged the GameSWF code into the GNU project style, he began
++development on the browser plugins.  The Free Software Foundation made
++Gnash a priority project, and many volunteers started contributing
++useful improvements.  We thank Thatcher Ulrich for the great start,
++Rob Savoye and John Gilmore for organizing the project, and the Gnash
++volunteers for making Gnash what it is today.
++
++SWF Support:
++--------------
++
++Many SWF movies play fine in Gnash.  Many others do not.  Occasionally, 
++SWF movies that are used for browser navigation may fail. Almost all
++SWF-based web-site navigation should work.
++
++Gnash supports practically all SWF opcodes and most ActionScript classes up
++to SWF version 9. There is currently no real support for ActionScript
++3 (ABC blocks) and AVM2, which were introduced in SWF version
++9. Despite this, Gnash can play most SWF8 and many SWF9 movies,
++because not all rely on unimplemented features.
++
++All unimplemented opcodes and ActionScript methods should print a warning
++when using -vv with gnash or gprocessor. Running gprocessor -vv is often an
++easy way to see why a movie isn't playing correctly.
++
++Plugin:	
++-------
++
++The plugin can play SWF files in cooperation with the browser.
++It works with any browser that supports Mozilla's NPAPI plugin interface.
++Gnash is know to work with Mozilla, Firefox, Iceweasel, Icecat, Konqueror,
++Epiphany, Galeon, Opera, SeaMonkey, Midori and Chromium.
++Gnash runs equally well in 32-bit and 64-bit environments.
++
++Configure with --with-plugindir= to set the directory that "make
++install-plugin" will install the plugin in. By default it will be installed
++in the user's .mozilla/plugins directory, even if you install using
++sudo.
++
++Platforms Supported:
++--------------------
++
++Gnash has been ported to a wide variety of hardware and operating
++systems. Primary platforms that get the most support are most of
++the GNU/Linux distributions, but Ubuntu, Fedora, and Debian primarily.
++Gnash is known to run on most BSD derived systems as well. There are
++also ports to Beos, Haiku, OS/2, Irix, Solaris, Sylllable, and
++OpenEmbedded.
++
++There are also ports of the standalone player to Darwin and
++Win32. Both require adding the dependent libraries Gnash needs. Work
++has started on a native Darwin (Aqua/Carbon/OpenGL) GUI so most of
++these packages won't be required. The win32 player can be built with
++Mingw32 and ought to be compilable with VC++ (but this has not been
++confirmed recently). 
++
++Gnash has also been ported to a variety of embedded devices, most
++running variations of OpenEmbedded. These include several custom
++hardware platforms aimed at educational software for children. Better
++known devices are the Sharp Zaurus family of PDAs (reflashed to run Open
++Zaurus), the Nokia Internet Tablets (770 / 800 / 810), the OLPC and the
++Pepper Pad 3, the latter two running a trimmed down Fedora.
++
++Gnash has been known to run on these 64-bit systems: the Itanium,
++UltraSparc, PowerPC, AMD64, MIPS. Embedded processors include several
++ARM variants, MIPS, and the Geode LX/GX.
++
++Building Gnash:
++---------------
++
++See the generic installation instructions in the file called "INSTALL".
++(If you are building from a fresh git checkout, first see the file
++"README.git" for additional instructions.)
++
++Depending on chosen functionality, CPU architecture, and OS the temporary
++files needed when Gnash compiles require as much as 1 GB of storage space.
++Approximately 400MB of virtual memory(RAM + swap) is also needed for linking.
++After installation, the temporary files may be removed with "make clean".
++
++Gnash has three main options: choice of renderer (graphics library used
++to render the SWF movie), choice(s) of GUI toolkit (gtk, qt4, etc), and choice
++of multimedia backend (audio and video decoder).
++
++Gnash supports multiple renderers. By default it'll build them all in
++the rendering library, or you can select which ones you want:
++
++   --enable-renderer=opengl
++   --enable-renderer=cairo
++   --enable-renderer=agg
++or --enable-renderer=all (default)
++
++Gnash can use different multimedia back-ends for sound and/or
++video. By default it'll build both FFmpeg and Gstreamer, which you
++can select at runtime. To select only one media handler use:
++
++   --enable-media=GST			Gstreamer (default)
++or --enable-media=ffmpeg		FFmpeg
++
++In some countries, the codecs needed to display audio and video are patented.
++The FFmpeg library implements these codecs.  If you link them directly into
++Gnash, you will create an executable which contains patented software and
++requires a license for redistribution in those countries.  If, instead,
++you build using gstreamer, the user installs the codecs of their choice.
++
++Gnash supports multiple graphics toolkits, and will build multiple
++executables:
++
++   --enable-gui=gtk
++   --enable-gui=qt4
++or --enable-gui=gtk,qt4 (default)
++
++Other guis: dump, raw framebuffer, fltk, kde3, qt4, gtk, sdl, qtopia,
++hildon, alp, riscos, aqua. Some guis are very specialized (dump writes
++out raw frames to a disk file). Other guis are not very well supported
++and may not even compile (aqua). 
++
++Different options will cause gnash to require different libraries.  The
++configure script does a good job of telling you how to get these libraries.
++
++The GTK support is the most developed and featureful, while the SDL
++support has fewer dependencies on other packages. The AGG backend
++gives better quality results, and works on devices with only a
++framebuffer.  Performance is better with the OpenGL backend, but
++only if an accelerated graphics driver installed. This may require the
++use of a non-free driver, so it's not for everyone. 
++
++Other required packages are libjpeg.
++
++If gettext support is installed, or is present in the standard C library,
++gnash will support translation of its messages into other
++languages. Boost is also required, as Gnash uses it for portable
++mutexes and threading.
++
++If you select gstreamer as the media backend, gnash requires version 0.10
++because earlier versions wouldn't let you insert clips into an existing
++sound stream, as Gnash needs to do. If you compile gnash to use
++Gstreamer, users who want to view Flash videos while running gnash 
++will need to install the FFmpeg plugin for gstreamer. Flash uses
++MPEG4, MP3, FLV, ACC, and Sorenson primarily. Gnash supports any codec
++supported by FFmpeg and Gstreamer.
++
++Building the Gnash plugin for browsers:
++--------------------------------------
++
++The plugin is automatically built, but is installed only when you
++say "make install-plugins". Installation target is controlled
++by a configure switch: --with-plugins-install=system|user|prefix.
++
++By default, the policy is 'user', which means the plugins will
++be installed for the sole user running 'make install-plugins'.
++Keep this in mind as you likely don't want to install plugins
++only for the root user...
++
++To build Klash, the Konqueror plugin, you need to have the KDE
++development packages installed. This now installs a Qt executable
++called "qt4-gnash" that is used by this plugin.
++
++The Gnash Community:
++--------------------
++
++Gnash has three mailing lists hosted at gnu.org. Archives of these
++lists are stored at http://mail.gnu.org/pipermail/: 
++
++    * gnash-dev@gnu.org is for discussion of gnash development,
++      porting to new platforms, ideas for the future. This is where
++      the nitty-gritty gets discussed about Gnash, and is the best
++      list for technical questions. To subscribe, go to
++      http://mail.gnu.org/mailman/listinfo/gnash-dev 
++    * gnash@gnu.org is a moderated list for announcements. New releases are
++      announced here. To subscribe, go to
++      http://mail.gnu.org/mailman/listinfo/gnash and register. Volume is
++      typically very low.
++    * gnash-commit@gnu.org is where summaries of changes committed to
++      the git repository are automatically posted. Register at
++      http://mail.gnu.org/mailman/listinfo/gnash-commit to be informed of
++      these changes as they happen. Volume may be high.
++      
++
++IRC:
++    * #gnash on irc.freenode.net The #gnash channel on irc.freenode.net is 
++      where many of the developers hang out.
++
++If you would like a new feature to be included in future versions of
++Gnash, please send a request to <gnash-dev@gnu.org>. You can also
++submit patches at https://savannah.gnu.org/patch/?group=gnash.
++
++Please remember that development of Gnash is a volunteer effort.
++You can contribute to its development. The Gnash project would like to
++find volunteers to focus on win32 and Darwin support, as well as help
++us fill in missing functionality. Offers of help can be sent to
++<gnash-dev@gnu.org>.
++
++For information about contributing to the GNU Project, please read How
++to help GNU at <http://www.gnu.org/help/help.html>.
++
++If you think you have found a bug in Gnash, then
++you should file as complete a report as possible at
++https://savannah.gnu.org/bugs/?group=gnash.  Please include the operating
++system name and version, and which gnash version you are using, in your
++bug reports. Please try to reproduce your bug reports with the most
++recent version of Gnash in git, as bugs are fixed there that may be
++broken in a standard release.
++
+--- gnash-0.8.11~git20160608.orig/depcomp
++++ gnash-0.8.11~git20160608/depcomp
+@@ -1,9 +1,9 @@
+ #! /bin/sh
+ # depcomp - compile a program generating dependencies as side-effects
+ 
+-scriptversion=2005-07-09.11
++scriptversion=2016-01-11.22; # UTC
+ 
+-# Copyright (C) 1999, 2000, 2003, 2004, 2005, 2009 Free Software Foundation, Inc.
++# Copyright (C) 1999-2017 Free Software Foundation, Inc.
+ 
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+@@ -16,9 +16,7 @@ scriptversion=2005-07-09.11
+ # GNU General Public License for more details.
+ 
+ # You should have received a copy of the GNU General Public License
+-# along with this program; if not, write to the Free Software
+-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+-# 02110-1301, USA.
++# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ 
+ # As a special exception to the GNU General Public License, if you
+ # distribute this file as part of a program that contains a
+@@ -29,9 +27,9 @@ scriptversion=2005-07-09.11
+ 
+ case $1 in
+   '')
+-     echo "$0: No command.  Try \`$0 --help' for more information." 1>&2
+-     exit 1;
+-     ;;
++    echo "$0: No command.  Try '$0 --help' for more information." 1>&2
++    exit 1;
++    ;;
+   -h | --h*)
+     cat <<\EOF
+ Usage: depcomp [--help] [--version] PROGRAM [ARGS]
+@@ -41,11 +39,11 @@ as side-effects.
+ 
+ Environment variables:
+   depmode     Dependency tracking mode.
+-  source      Source file read by `PROGRAMS ARGS'.
+-  object      Object file output by `PROGRAMS ARGS'.
++  source      Source file read by 'PROGRAMS ARGS'.
++  object      Object file output by 'PROGRAMS ARGS'.
+   DEPDIR      directory where to store dependencies.
+   depfile     Dependency file to output.
+-  tmpdepfile  Temporary file to use when outputing dependencies.
++  tmpdepfile  Temporary file to use when outputting dependencies.
+   libtool     Whether libtool is used (yes/no).
+ 
+ Report bugs to <bug-automake@gnu.org>.
+@@ -58,6 +56,66 @@ EOF
+     ;;
+ esac
+ 
++# Get the directory component of the given path, and save it in the
++# global variables '$dir'.  Note that this directory component will
++# be either empty or ending with a '/' character.  This is deliberate.
++set_dir_from ()
++{
++  case $1 in
++    */*) dir=`echo "$1" | sed -e 's|/[^/]*$|/|'`;;
++      *) dir=;;
++  esac
++}
++
++# Get the suffix-stripped basename of the given path, and save it the
++# global variable '$base'.
++set_base_from ()
++{
++  base=`echo "$1" | sed -e 's|^.*/||' -e 's/\.[^.]*$//'`
++}
++
++# If no dependency file was actually created by the compiler invocation,
++# we still have to create a dummy depfile, to avoid errors with the
++# Makefile "include basename.Plo" scheme.
++make_dummy_depfile ()
++{
++  echo "#dummy" > "$depfile"
++}
++
++# Factor out some common post-processing of the generated depfile.
++# Requires the auxiliary global variable '$tmpdepfile' to be set.
++aix_post_process_depfile ()
++{
++  # If the compiler actually managed to produce a dependency file,
++  # post-process it.
++  if test -f "$tmpdepfile"; then
++    # Each line is of the form 'foo.o: dependency.h'.
++    # Do two passes, one to just change these to
++    #   $object: dependency.h
++    # and one to simply output
++    #   dependency.h:
++    # which is needed to avoid the deleted-header problem.
++    { sed -e "s,^.*\.[$lower]*:,$object:," < "$tmpdepfile"
++      sed -e "s,^.*\.[$lower]*:[$tab ]*,," -e 's,$,:,' < "$tmpdepfile"
++    } > "$depfile"
++    rm -f "$tmpdepfile"
++  else
++    make_dummy_depfile
++  fi
++}
++
++# A tabulation character.
++tab='	'
++# A newline character.
++nl='
++'
++# Character ranges might be problematic outside the C locale.
++# These definitions help.
++upper=ABCDEFGHIJKLMNOPQRSTUVWXYZ
++lower=abcdefghijklmnopqrstuvwxyz
++digits=0123456789
++alpha=${upper}${lower}
++
+ if test -z "$depmode" || test -z "$source" || test -z "$object"; then
+   echo "depcomp: Variables source, object and depmode must be set" 1>&2
+   exit 1
+@@ -70,6 +128,9 @@ tmpdepfile=${tmpdepfile-`echo "$depfile"
+ 
+ rm -f "$tmpdepfile"
+ 
++# Avoid interferences from the environment.
++gccflag= dashmflag=
++
+ # Some modes work just like other modes, but use different flags.  We
+ # parameterize here, but still list the modes in the big case below,
+ # to make depend.m4 easier to write.  Note that we *cannot* use a case
+@@ -81,9 +142,32 @@ if test "$depmode" = hp; then
+ fi
+ 
+ if test "$depmode" = dashXmstdout; then
+-   # This is just like dashmstdout with a different argument.
+-   dashmflag=-xM
+-   depmode=dashmstdout
++  # This is just like dashmstdout with a different argument.
++  dashmflag=-xM
++  depmode=dashmstdout
++fi
++
++cygpath_u="cygpath -u -f -"
++if test "$depmode" = msvcmsys; then
++  # This is just like msvisualcpp but w/o cygpath translation.
++  # Just convert the backslash-escaped backslashes to single forward
++  # slashes to satisfy depend.m4
++  cygpath_u='sed s,\\\\,/,g'
++  depmode=msvisualcpp
++fi
++
++if test "$depmode" = msvc7msys; then
++  # This is just like msvc7 but w/o cygpath translation.
++  # Just convert the backslash-escaped backslashes to single forward
++  # slashes to satisfy depend.m4
++  cygpath_u='sed s,\\\\,/,g'
++  depmode=msvc7
++fi
++
++if test "$depmode" = xlc; then
++  # IBM C/C++ Compilers xlc/xlC can output gcc-like dependency information.
++  gccflag=-qmakedep=gcc,-MF
++  depmode=gcc
+ fi
+ 
+ case "$depmode" in
+@@ -91,10 +175,22 @@ gcc3)
+ ## gcc 3 implements dependency tracking that does exactly what
+ ## we want.  Yay!  Note: for some reason libtool 1.4 doesn't like
+ ## it if -MD -MP comes after the -MF stuff.  Hmm.
+-  "$@" -MT "$object" -MD -MP -MF "$tmpdepfile"
++## Unfortunately, FreeBSD c89 acceptance of flags depends upon
++## the command line argument order; so add the flags where they
++## appear in depend2.am.  Note that the slowdown incurred here
++## affects only configure: in makefiles, %FASTDEP% shortcuts this.
++  for arg
++  do
++    case $arg in
++    -c) set fnord "$@" -MT "$object" -MD -MP -MF "$tmpdepfile" "$arg" ;;
++    *)  set fnord "$@" "$arg" ;;
++    esac
++    shift # fnord
++    shift # $arg
++  done
++  "$@"
+   stat=$?
+-  if test $stat -eq 0; then :
+-  else
++  if test $stat -ne 0; then
+     rm -f "$tmpdepfile"
+     exit $stat
+   fi
+@@ -102,13 +198,17 @@ gcc3)
+   ;;
+ 
+ gcc)
++## Note that this doesn't just cater to obsosete pre-3.x GCC compilers.
++## but also to in-use compilers like IMB xlc/xlC and the HP C compiler.
++## (see the conditional assignment to $gccflag above).
+ ## There are various ways to get dependency output from gcc.  Here's
+ ## why we pick this rather obscure method:
+ ## - Don't want to use -MD because we'd like the dependencies to end
+ ##   up in a subdir.  Having to rename by hand is ugly.
+ ##   (We might end up doing this anyway to support other compilers.)
+ ## - The DEPENDENCIES_OUTPUT environment variable makes gcc act like
+-##   -MM, not -M (despite what the docs say).
++##   -MM, not -M (despite what the docs say).  Also, it might not be
++##   supported by the other compilers which use the 'gcc' depmode.
+ ## - Using -M directly means running the compiler twice (even worse
+ ##   than renaming).
+   if test -z "$gccflag"; then
+@@ -116,31 +216,31 @@ gcc)
+   fi
+   "$@" -Wp,"$gccflag$tmpdepfile"
+   stat=$?
+-  if test $stat -eq 0; then :
+-  else
++  if test $stat -ne 0; then
+     rm -f "$tmpdepfile"
+     exit $stat
+   fi
+   rm -f "$depfile"
+   echo "$object : \\" > "$depfile"
+-  alpha=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+-## The second -e expression handles DOS-style file names with drive letters.
++  # The second -e expression handles DOS-style file names with drive
++  # letters.
+   sed -e 's/^[^:]*: / /' \
+       -e 's/^['$alpha']:\/[^:]*: / /' < "$tmpdepfile" >> "$depfile"
+-## This next piece of magic avoids the `deleted header file' problem.
++## This next piece of magic avoids the "deleted header file" problem.
+ ## The problem is that when a header file which appears in a .P file
+ ## is deleted, the dependency causes make to die (because there is
+ ## typically no way to rebuild the header).  We avoid this by adding
+ ## dummy dependencies for each header file.  Too bad gcc doesn't do
+ ## this for us directly.
+-  tr ' ' '
+-' < "$tmpdepfile" |
+-## Some versions of gcc put a space before the `:'.  On the theory
++## Some versions of gcc put a space before the ':'.  On the theory
+ ## that the space means something, we add a space to the output as
+-## well.
++## well.  hp depmode also adds that space, but also prefixes the VPATH
++## to the object.  Take care to not repeat it in the output.
+ ## Some versions of the HPUX 10.20 sed can't process this invocation
+ ## correctly.  Breaking it into two sed invocations is a workaround.
+-    sed -e 's/^\\$//' -e '/^$/d' -e '/:$/d' | sed -e 's/$/ :/' >> "$depfile"
++  tr ' ' "$nl" < "$tmpdepfile" \
++    | sed -e 's/^\\$//' -e '/^$/d' -e "s|.*$object$||" -e '/:$/d' \
++    | sed -e 's/$/ :/' >> "$depfile"
+   rm -f "$tmpdepfile"
+   ;;
+ 
+@@ -158,8 +258,7 @@ sgi)
+     "$@" -MDupdate "$tmpdepfile"
+   fi
+   stat=$?
+-  if test $stat -eq 0; then :
+-  else
++  if test $stat -ne 0; then
+     rm -f "$tmpdepfile"
+     exit $stat
+   fi
+@@ -167,99 +266,156 @@ sgi)
+ 
+   if test -f "$tmpdepfile"; then  # yes, the sourcefile depend on other files
+     echo "$object : \\" > "$depfile"
+-
+     # Clip off the initial element (the dependent).  Don't try to be
+     # clever and replace this with sed code, as IRIX sed won't handle
+     # lines with more than a fixed number of characters (4096 in
+     # IRIX 6.2 sed, 8192 in IRIX 6.5).  We also remove comment lines;
+-    # the IRIX cc adds comments like `#:fec' to the end of the
++    # the IRIX cc adds comments like '#:fec' to the end of the
+     # dependency line.
+-    tr ' ' '
+-' < "$tmpdepfile" \
+-    | sed -e 's/^.*\.o://' -e 's/#.*$//' -e '/^$/ d' | \
+-    tr '
+-' ' ' >> $depfile
+-    echo >> $depfile
+-
++    tr ' ' "$nl" < "$tmpdepfile" \
++      | sed -e 's/^.*\.o://' -e 's/#.*$//' -e '/^$/ d' \
++      | tr "$nl" ' ' >> "$depfile"
++    echo >> "$depfile"
+     # The second pass generates a dummy entry for each header file.
+-    tr ' ' '
+-' < "$tmpdepfile" \
+-   | sed -e 's/^.*\.o://' -e 's/#.*$//' -e '/^$/ d' -e 's/$/:/' \
+-   >> $depfile
++    tr ' ' "$nl" < "$tmpdepfile" \
++      | sed -e 's/^.*\.o://' -e 's/#.*$//' -e '/^$/ d' -e 's/$/:/' \
++      >> "$depfile"
+   else
+-    # The sourcefile does not contain any dependencies, so just
+-    # store a dummy comment line, to avoid errors with the Makefile
+-    # "include basename.Plo" scheme.
+-    echo "#dummy" > "$depfile"
++    make_dummy_depfile
+   fi
+   rm -f "$tmpdepfile"
+   ;;
+ 
++xlc)
++  # This case exists only to let depend.m4 do its work.  It works by
++  # looking at the text of this script.  This case will never be run,
++  # since it is checked for above.
++  exit 1
++  ;;
++
+ aix)
+   # The C for AIX Compiler uses -M and outputs the dependencies
+   # in a .u file.  In older versions, this file always lives in the
+-  # current directory.  Also, the AIX compiler puts `$object:' at the
++  # current directory.  Also, the AIX compiler puts '$object:' at the
+   # start of each line; $object doesn't have directory information.
+   # Version 6 uses the directory in both cases.
+-  stripped=`echo "$object" | sed 's/\(.*\)\..*$/\1/'`
+-  tmpdepfile="$stripped.u"
++  set_dir_from "$object"
++  set_base_from "$object"
+   if test "$libtool" = yes; then
++    tmpdepfile1=$dir$base.u
++    tmpdepfile2=$base.u
++    tmpdepfile3=$dir.libs/$base.u
+     "$@" -Wc,-M
+   else
++    tmpdepfile1=$dir$base.u
++    tmpdepfile2=$dir$base.u
++    tmpdepfile3=$dir$base.u
+     "$@" -M
+   fi
+   stat=$?
+-
+-  if test -f "$tmpdepfile"; then :
+-  else
+-    stripped=`echo "$stripped" | sed 's,^.*/,,'`
+-    tmpdepfile="$stripped.u"
++  if test $stat -ne 0; then
++    rm -f "$tmpdepfile1" "$tmpdepfile2" "$tmpdepfile3"
++    exit $stat
+   fi
+ 
+-  if test $stat -eq 0; then :
+-  else
++  for tmpdepfile in "$tmpdepfile1" "$tmpdepfile2" "$tmpdepfile3"
++  do
++    test -f "$tmpdepfile" && break
++  done
++  aix_post_process_depfile
++  ;;
++
++tcc)
++  # tcc (Tiny C Compiler) understand '-MD -MF file' since version 0.9.26
++  # FIXME: That version still under development at the moment of writing.
++  #        Make that this statement remains true also for stable, released
++  #        versions.
++  # It will wrap lines (doesn't matter whether long or short) with a
++  # trailing '\', as in:
++  #
++  #   foo.o : \
++  #    foo.c \
++  #    foo.h \
++  #
++  # It will put a trailing '\' even on the last line, and will use leading
++  # spaces rather than leading tabs (at least since its commit 0394caf7
++  # "Emit spaces for -MD").
++  "$@" -MD -MF "$tmpdepfile"
++  stat=$?
++  if test $stat -ne 0; then
+     rm -f "$tmpdepfile"
+     exit $stat
+   fi
+-
+-  if test -f "$tmpdepfile"; then
+-    outname="$stripped.o"
+-    # Each line is of the form `foo.o: dependent.h'.
+-    # Do two passes, one to just change these to
+-    # `$object: dependent.h' and one to simply `dependent.h:'.
+-    sed -e "s,^$outname:,$object :," < "$tmpdepfile" > "$depfile"
+-    sed -e "s,^$outname: \(.*\)$,\1:," < "$tmpdepfile" >> "$depfile"
+-  else
+-    # The sourcefile does not contain any dependencies, so just
+-    # store a dummy comment line, to avoid errors with the Makefile
+-    # "include basename.Plo" scheme.
+-    echo "#dummy" > "$depfile"
+-  fi
++  rm -f "$depfile"
++  # Each non-empty line is of the form 'foo.o : \' or ' dep.h \'.
++  # We have to change lines of the first kind to '$object: \'.
++  sed -e "s|.*:|$object :|" < "$tmpdepfile" > "$depfile"
++  # And for each line of the second kind, we have to emit a 'dep.h:'
++  # dummy dependency, to avoid the deleted-header problem.
++  sed -n -e 's|^  *\(.*\) *\\$|\1:|p' < "$tmpdepfile" >> "$depfile"
+   rm -f "$tmpdepfile"
+   ;;
+ 
+-icc)
+-  # Intel's C compiler understands `-MD -MF file'.  However on
+-  #    icc -MD -MF foo.d -c -o sub/foo.o sub/foo.c
+-  # ICC 7.0 will fill foo.d with something like
+-  #    foo.o: sub/foo.c
+-  #    foo.o: sub/foo.h
+-  # which is wrong.  We want:
+-  #    sub/foo.o: sub/foo.c
+-  #    sub/foo.o: sub/foo.h
+-  #    sub/foo.c:
+-  #    sub/foo.h:
+-  # ICC 7.1 will output
++## The order of this option in the case statement is important, since the
++## shell code in configure will try each of these formats in the order
++## listed in this file.  A plain '-MD' option would be understood by many
++## compilers, so we must ensure this comes after the gcc and icc options.
++pgcc)
++  # Portland's C compiler understands '-MD'.
++  # Will always output deps to 'file.d' where file is the root name of the
++  # source file under compilation, even if file resides in a subdirectory.
++  # The object file name does not affect the name of the '.d' file.
++  # pgcc 10.2 will output
+   #    foo.o: sub/foo.c sub/foo.h
+-  # and will wrap long lines using \ :
++  # and will wrap long lines using '\' :
+   #    foo.o: sub/foo.c ... \
+   #     sub/foo.h ... \
+   #     ...
++  set_dir_from "$object"
++  # Use the source, not the object, to determine the base name, since
++  # that's sadly what pgcc will do too.
++  set_base_from "$source"
++  tmpdepfile=$base.d
++
++  # For projects that build the same source file twice into different object
++  # files, the pgcc approach of using the *source* file root name can cause
++  # problems in parallel builds.  Use a locking strategy to avoid stomping on
++  # the same $tmpdepfile.
++  lockdir=$base.d-lock
++  trap "
++    echo '$0: caught signal, cleaning up...' >&2
++    rmdir '$lockdir'
++    exit 1
++  " 1 2 13 15
++  numtries=100
++  i=$numtries
++  while test $i -gt 0; do
++    # mkdir is a portable test-and-set.
++    if mkdir "$lockdir" 2>/dev/null; then
++      # This process acquired the lock.
++      "$@" -MD
++      stat=$?
++      # Release the lock.
++      rmdir "$lockdir"
++      break
++    else
++      # If the lock is being held by a different process, wait
++      # until the winning process is done or we timeout.
++      while test -d "$lockdir" && test $i -gt 0; do
++        sleep 1
++        i=`expr $i - 1`
++      done
++    fi
++    i=`expr $i - 1`
++  done
++  trap - 1 2 13 15
++  if test $i -le 0; then
++    echo "$0: failed to acquire lock after $numtries attempts" >&2
++    echo "$0: check lockdir '$lockdir'" >&2
++    exit 1
++  fi
+ 
+-  "$@" -MD -MF "$tmpdepfile"
+-  stat=$?
+-  if test $stat -eq 0; then :
+-  else
++  if test $stat -ne 0; then
+     rm -f "$tmpdepfile"
+     exit $stat
+   fi
+@@ -271,68 +427,141 @@ icc)
+   sed "s,^[^:]*:,$object :," < "$tmpdepfile" > "$depfile"
+   # Some versions of the HPUX 10.20 sed can't process this invocation
+   # correctly.  Breaking it into two sed invocations is a workaround.
+-  sed 's,^[^:]*: \(.*\)$,\1,;s/^\\$//;/^$/d;/:$/d' < "$tmpdepfile" |
+-    sed -e 's/$/ :/' >> "$depfile"
++  sed 's,^[^:]*: \(.*\)$,\1,;s/^\\$//;/^$/d;/:$/d' < "$tmpdepfile" \
++    | sed -e 's/$/ :/' >> "$depfile"
+   rm -f "$tmpdepfile"
+   ;;
+ 
++hp2)
++  # The "hp" stanza above does not work with aCC (C++) and HP's ia64
++  # compilers, which have integrated preprocessors.  The correct option
++  # to use with these is +Maked; it writes dependencies to a file named
++  # 'foo.d', which lands next to the object file, wherever that
++  # happens to be.
++  # Much of this is similar to the tru64 case; see comments there.
++  set_dir_from  "$object"
++  set_base_from "$object"
++  if test "$libtool" = yes; then
++    tmpdepfile1=$dir$base.d
++    tmpdepfile2=$dir.libs/$base.d
++    "$@" -Wc,+Maked
++  else
++    tmpdepfile1=$dir$base.d
++    tmpdepfile2=$dir$base.d
++    "$@" +Maked
++  fi
++  stat=$?
++  if test $stat -ne 0; then
++     rm -f "$tmpdepfile1" "$tmpdepfile2"
++     exit $stat
++  fi
++
++  for tmpdepfile in "$tmpdepfile1" "$tmpdepfile2"
++  do
++    test -f "$tmpdepfile" && break
++  done
++  if test -f "$tmpdepfile"; then
++    sed -e "s,^.*\.[$lower]*:,$object:," "$tmpdepfile" > "$depfile"
++    # Add 'dependent.h:' lines.
++    sed -ne '2,${
++               s/^ *//
++               s/ \\*$//
++               s/$/:/
++               p
++             }' "$tmpdepfile" >> "$depfile"
++  else
++    make_dummy_depfile
++  fi
++  rm -f "$tmpdepfile" "$tmpdepfile2"
++  ;;
++
+ tru64)
+-   # The Tru64 compiler uses -MD to generate dependencies as a side
+-   # effect.  `cc -MD -o foo.o ...' puts the dependencies into `foo.o.d'.
+-   # At least on Alpha/Redhat 6.1, Compaq CCC V6.2-504 seems to put
+-   # dependencies in `foo.d' instead, so we check for that too.
+-   # Subdirectories are respected.
+-   dir=`echo "$object" | sed -e 's|/[^/]*$|/|'`
+-   test "x$dir" = "x$object" && dir=
+-   base=`echo "$object" | sed -e 's|^.*/||' -e 's/\.o$//' -e 's/\.lo$//'`
+-
+-   if test "$libtool" = yes; then
+-      # With Tru64 cc, shared objects can also be used to make a
+-      # static library.  This mecanism is used in libtool 1.4 series to
+-      # handle both shared and static libraries in a single compilation.
+-      # With libtool 1.4, dependencies were output in $dir.libs/$base.lo.d.
+-      #
+-      # With libtool 1.5 this exception was removed, and libtool now
+-      # generates 2 separate objects for the 2 libraries.  These two
+-      # compilations output dependencies in in $dir.libs/$base.o.d and
+-      # in $dir$base.o.d.  We have to check for both files, because
+-      # one of the two compilations can be disabled.  We should prefer
+-      # $dir$base.o.d over $dir.libs/$base.o.d because the latter is
+-      # automatically cleaned when .libs/ is deleted, while ignoring
+-      # the former would cause a distcleancheck panic.
+-      tmpdepfile1=$dir.libs/$base.lo.d   # libtool 1.4
+-      tmpdepfile2=$dir$base.o.d          # libtool 1.5
+-      tmpdepfile3=$dir.libs/$base.o.d    # libtool 1.5
+-      tmpdepfile4=$dir.libs/$base.d      # Compaq CCC V6.2-504
+-      "$@" -Wc,-MD
+-   else
+-      tmpdepfile1=$dir$base.o.d
+-      tmpdepfile2=$dir$base.d
+-      tmpdepfile3=$dir$base.d
+-      tmpdepfile4=$dir$base.d
+-      "$@" -MD
+-   fi
++  # The Tru64 compiler uses -MD to generate dependencies as a side
++  # effect.  'cc -MD -o foo.o ...' puts the dependencies into 'foo.o.d'.
++  # At least on Alpha/Redhat 6.1, Compaq CCC V6.2-504 seems to put
++  # dependencies in 'foo.d' instead, so we check for that too.
++  # Subdirectories are respected.
++  set_dir_from  "$object"
++  set_base_from "$object"
++
++  if test "$libtool" = yes; then
++    # Libtool generates 2 separate objects for the 2 libraries.  These
++    # two compilations output dependencies in $dir.libs/$base.o.d and
++    # in $dir$base.o.d.  We have to check for both files, because
++    # one of the two compilations can be disabled.  We should prefer
++    # $dir$base.o.d over $dir.libs/$base.o.d because the latter is
++    # automatically cleaned when .libs/ is deleted, while ignoring
++    # the former would cause a distcleancheck panic.
++    tmpdepfile1=$dir$base.o.d          # libtool 1.5
++    tmpdepfile2=$dir.libs/$base.o.d    # Likewise.
++    tmpdepfile3=$dir.libs/$base.d      # Compaq CCC V6.2-504
++    "$@" -Wc,-MD
++  else
++    tmpdepfile1=$dir$base.d
++    tmpdepfile2=$dir$base.d
++    tmpdepfile3=$dir$base.d
++    "$@" -MD
++  fi
++
++  stat=$?
++  if test $stat -ne 0; then
++    rm -f "$tmpdepfile1" "$tmpdepfile2" "$tmpdepfile3"
++    exit $stat
++  fi
++
++  for tmpdepfile in "$tmpdepfile1" "$tmpdepfile2" "$tmpdepfile3"
++  do
++    test -f "$tmpdepfile" && break
++  done
++  # Same post-processing that is required for AIX mode.
++  aix_post_process_depfile
++  ;;
+ 
+-   stat=$?
+-   if test $stat -eq 0; then :
+-   else
+-      rm -f "$tmpdepfile1" "$tmpdepfile2" "$tmpdepfile3" "$tmpdepfile4"
+-      exit $stat
+-   fi
+-
+-   for tmpdepfile in "$tmpdepfile1" "$tmpdepfile2" "$tmpdepfile3" "$tmpdepfile4"
+-   do
+-     test -f "$tmpdepfile" && break
+-   done
+-   if test -f "$tmpdepfile"; then
+-      sed -e "s,^.*\.[a-z]*:,$object:," < "$tmpdepfile" > "$depfile"
+-      # That's a tab and a space in the [].
+-      sed -e 's,^.*\.[a-z]*:[	 ]*,,' -e 's,$,:,' < "$tmpdepfile" >> "$depfile"
+-   else
+-      echo "#dummy" > "$depfile"
+-   fi
+-   rm -f "$tmpdepfile"
+-   ;;
++msvc7)
++  if test "$libtool" = yes; then
++    showIncludes=-Wc,-showIncludes
++  else
++    showIncludes=-showIncludes
++  fi
++  "$@" $showIncludes > "$tmpdepfile"
++  stat=$?
++  grep -v '^Note: including file: ' "$tmpdepfile"
++  if test $stat -ne 0; then
++    rm -f "$tmpdepfile"
++    exit $stat
++  fi
++  rm -f "$depfile"
++  echo "$object : \\" > "$depfile"
++  # The first sed program below extracts the file names and escapes
++  # backslashes for cygpath.  The second sed program outputs the file
++  # name when reading, but also accumulates all include files in the
++  # hold buffer in order to output them again at the end.  This only
++  # works with sed implementations that can handle large buffers.
++  sed < "$tmpdepfile" -n '
++/^Note: including file:  *\(.*\)/ {
++  s//\1/
++  s/\\/\\\\/g
++  p
++}' | $cygpath_u | sort -u | sed -n '
++s/ /\\ /g
++s/\(.*\)/'"$tab"'\1 \\/p
++s/.\(.*\) \\/\1:/
++H
++$ {
++  s/.*/'"$tab"'/
++  G
++  p
++}' >> "$depfile"
++  echo >> "$depfile" # make sure the fragment doesn't end with a backslash
++  rm -f "$tmpdepfile"
++  ;;
++
++msvc7msys)
++  # This case exists only to let depend.m4 do its work.  It works by
++  # looking at the text of this script.  This case will never be run,
++  # since it is checked for above.
++  exit 1
++  ;;
+ 
+ #nosideeffect)
+   # This comment above is used by automake to tell side-effect
+@@ -345,13 +574,13 @@ dashmstdout)
+ 
+   # Remove the call to Libtool.
+   if test "$libtool" = yes; then
+-    while test $1 != '--mode=compile'; do
++    while test "X$1" != 'X--mode=compile'; do
+       shift
+     done
+     shift
+   fi
+ 
+-  # Remove `-o $object'.
++  # Remove '-o $object'.
+   IFS=" "
+   for arg
+   do
+@@ -371,18 +600,18 @@ dashmstdout)
+   done
+ 
+   test -z "$dashmflag" && dashmflag=-M
+-  # Require at least two characters before searching for `:'
++  # Require at least two characters before searching for ':'
+   # in the target name.  This is to cope with DOS-style filenames:
+-  # a dependency such as `c:/foo/bar' could be seen as target `c' otherwise.
++  # a dependency such as 'c:/foo/bar' could be seen as target 'c' otherwise.
+   "$@" $dashmflag |
+-    sed 's:^[  ]*[^: ][^:][^:]*\:[    ]*:'"$object"'\: :' > "$tmpdepfile"
++    sed "s|^[$tab ]*[^:$tab ][^:][^:]*:[$tab ]*|$object: |" > "$tmpdepfile"
+   rm -f "$depfile"
+   cat < "$tmpdepfile" > "$depfile"
+-  tr ' ' '
+-' < "$tmpdepfile" | \
+-## Some versions of the HPUX 10.20 sed can't process this invocation
+-## correctly.  Breaking it into two sed invocations is a workaround.
+-    sed -e 's/^\\$//' -e '/^$/d' -e '/:$/d' | sed -e 's/$/ :/' >> "$depfile"
++  # Some versions of the HPUX 10.20 sed can't process this sed invocation
++  # correctly.  Breaking it into two sed invocations is a workaround.
++  tr ' ' "$nl" < "$tmpdepfile" \
++    | sed -e 's/^\\$//' -e '/^$/d' -e '/:$/d' \
++    | sed -e 's/$/ :/' >> "$depfile"
+   rm -f "$tmpdepfile"
+   ;;
+ 
+@@ -396,41 +625,51 @@ makedepend)
+   "$@" || exit $?
+   # Remove any Libtool call
+   if test "$libtool" = yes; then
+-    while test $1 != '--mode=compile'; do
++    while test "X$1" != 'X--mode=compile'; do
+       shift
+     done
+     shift
+   fi
+   # X makedepend
+   shift
+-  cleared=no
+-  for arg in "$@"; do
++  cleared=no eat=no
++  for arg
++  do
+     case $cleared in
+     no)
+       set ""; shift
+       cleared=yes ;;
+     esac
++    if test $eat = yes; then
++      eat=no
++      continue
++    fi
+     case "$arg" in
+     -D*|-I*)
+       set fnord "$@" "$arg"; shift ;;
+     # Strip any option that makedepend may not understand.  Remove
+     # the object too, otherwise makedepend will parse it as a source file.
++    -arch)
++      eat=yes ;;
+     -*|$object)
+       ;;
+     *)
+       set fnord "$@" "$arg"; shift ;;
+     esac
+   done
+-  obj_suffix="`echo $object | sed 's/^.*\././'`"
++  obj_suffix=`echo "$object" | sed 's/^.*\././'`
+   touch "$tmpdepfile"
+   ${MAKEDEPEND-makedepend} -o"$obj_suffix" -f"$tmpdepfile" "$@"
+   rm -f "$depfile"
+-  cat < "$tmpdepfile" > "$depfile"
+-  sed '1,2d' "$tmpdepfile" | tr ' ' '
+-' | \
+-## Some versions of the HPUX 10.20 sed can't process this invocation
+-## correctly.  Breaking it into two sed invocations is a workaround.
+-    sed -e 's/^\\$//' -e '/^$/d' -e '/:$/d' | sed -e 's/$/ :/' >> "$depfile"
++  # makedepend may prepend the VPATH from the source file name to the object.
++  # No need to regex-escape $object, excess matching of '.' is harmless.
++  sed "s|^.*\($object *:\)|\1|" "$tmpdepfile" > "$depfile"
++  # Some versions of the HPUX 10.20 sed can't process the last invocation
++  # correctly.  Breaking it into two sed invocations is a workaround.
++  sed '1,2d' "$tmpdepfile" \
++    | tr ' ' "$nl" \
++    | sed -e 's/^\\$//' -e '/^$/d' -e '/:$/d' \
++    | sed -e 's/$/ :/' >> "$depfile"
+   rm -f "$tmpdepfile" "$tmpdepfile".bak
+   ;;
+ 
+@@ -441,13 +680,13 @@ cpp)
+ 
+   # Remove the call to Libtool.
+   if test "$libtool" = yes; then
+-    while test $1 != '--mode=compile'; do
++    while test "X$1" != 'X--mode=compile'; do
+       shift
+     done
+     shift
+   fi
+ 
+-  # Remove `-o $object'.
++  # Remove '-o $object'.
+   IFS=" "
+   for arg
+   do
+@@ -466,10 +705,10 @@ cpp)
+     esac
+   done
+ 
+-  "$@" -E |
+-    sed -n -e '/^# [0-9][0-9]* "\([^"]*\)".*/ s:: \1 \\:p' \
+-       -e '/^#line [0-9][0-9]* "\([^"]*\)".*/ s:: \1 \\:p' |
+-    sed '$ s: \\$::' > "$tmpdepfile"
++  "$@" -E \
++    | sed -n -e '/^# [0-9][0-9]* "\([^"]*\)".*/ s:: \1 \\:p' \
++             -e '/^#line [0-9][0-9]* "\([^"]*\)".*/ s:: \1 \\:p' \
++    | sed '$ s: \\$::' > "$tmpdepfile"
+   rm -f "$depfile"
+   echo "$object : \\" > "$depfile"
+   cat < "$tmpdepfile" >> "$depfile"
+@@ -479,35 +718,56 @@ cpp)
+ 
+ msvisualcpp)
+   # Important note: in order to support this mode, a compiler *must*
+-  # always write the preprocessed file to stdout, regardless of -o,
+-  # because we must use -o when running libtool.
++  # always write the preprocessed file to stdout.
+   "$@" || exit $?
++
++  # Remove the call to Libtool.
++  if test "$libtool" = yes; then
++    while test "X$1" != 'X--mode=compile'; do
++      shift
++    done
++    shift
++  fi
++
+   IFS=" "
+   for arg
+   do
+     case "$arg" in
++    -o)
++      shift
++      ;;
++    $object)
++      shift
++      ;;
+     "-Gm"|"/Gm"|"-Gi"|"/Gi"|"-ZI"|"/ZI")
+-	set fnord "$@"
+-	shift
+-	shift
+-	;;
++        set fnord "$@"
++        shift
++        shift
++        ;;
+     *)
+-	set fnord "$@" "$arg"
+-	shift
+-	shift
+-	;;
++        set fnord "$@" "$arg"
++        shift
++        shift
++        ;;
+     esac
+   done
+-  "$@" -E |
+-  sed -n '/^#line [0-9][0-9]* "\([^"]*\)"/ s::echo "`cygpath -u \\"\1\\"`":p' | sort | uniq > "$tmpdepfile"
++  "$@" -E 2>/dev/null |
++  sed -n '/^#line [0-9][0-9]* "\([^"]*\)"/ s::\1:p' | $cygpath_u | sort -u > "$tmpdepfile"
+   rm -f "$depfile"
+   echo "$object : \\" > "$depfile"
+-  . "$tmpdepfile" | sed 's% %\\ %g' | sed -n '/^\(.*\)$/ s::	\1 \\:p' >> "$depfile"
+-  echo "	" >> "$depfile"
+-  . "$tmpdepfile" | sed 's% %\\ %g' | sed -n '/^\(.*\)$/ s::\1\::p' >> "$depfile"
++  sed < "$tmpdepfile" -n -e 's% %\\ %g' -e '/^\(.*\)$/ s::'"$tab"'\1 \\:p' >> "$depfile"
++  echo "$tab" >> "$depfile"
++  sed < "$tmpdepfile" -n -e 's% %\\ %g' -e '/^\(.*\)$/ s::\1\::p' >> "$depfile"
+   rm -f "$tmpdepfile"
+   ;;
+ 
++msvcmsys)
++  # This case exists only to let depend.m4 do its work.  It works by
++  # looking at the text of this script.  This case will never be run,
++  # since it is checked for above.
++  exit 1
++  ;;
++
+ none)
+   exec "$@"
+   ;;
+@@ -526,5 +786,6 @@ exit 0
+ # eval: (add-hook 'write-file-hooks 'time-stamp)
+ # time-stamp-start: "scriptversion="
+ # time-stamp-format: "%:y-%02m-%02d.%02H"
+-# time-stamp-end: "$"
++# time-stamp-time-zone: "UTC0"
++# time-stamp-end: "; # UTC"
+ # End:
+--- gnash-0.8.11~git20160608.orig/missing
++++ gnash-0.8.11~git20160608/missing
+@@ -1,9 +1,9 @@
+ #! /bin/sh
+ # Common wrapper for a few potentially missing GNU programs.
+ 
+-scriptversion=2012-06-26.16; # UTC
++scriptversion=2013-10-28.13; # UTC
+ 
+-# Copyright (C) 1996-2013 Free Software Foundation, Inc.
++# Copyright (C) 1996-2014 Free Software Foundation, Inc.
+ # Originally written by Fran,cois Pinard <pinard@iro.umontreal.ca>, 1996.
+ 
+ # This program is free software; you can redistribute it and/or modify
+@@ -160,7 +160,7 @@ give_advice ()
+       ;;
+    autom4te*)
+       echo "You might have modified some maintainer files that require"
+-      echo "the 'automa4te' program to be rebuilt."
++      echo "the 'autom4te' program to be rebuilt."
+       program_details 'autom4te'
+       ;;
+     bison*|yacc*)
