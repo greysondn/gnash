@@ -118,9 +118,9 @@ ifeq (,$(filter hurd-%,$(DEB_BUILD_ARCH)))
 	install debian/tmp/usr/lib/gnash/libgnashsound.so debian/gnash-dev/usr/lib/gnash
 endif
 
-	# make info docs load rtmp.png installed under /usr/share/doc/gnash-common
-	sed -i 's/images\/rtmp.png/\/usr\/share\/doc\/gnash-common\/images\/rtmp.png/' \
-		debian/tmp/usr/share/info/gnash_ref.info
+#	# make info docs load rtmp.png installed under /usr/share/doc/gnash-common
+#	sed -i 's/images\/rtmp.png/\/usr\/share\/doc\/gnash-common\/images\/rtmp.png/' \
+#		debian/tmp/usr/share/info/gnash_ref.info
 
 # override_dh_strip:
 #	dh_strip --dbg-package=gnash-dbg
