@@ -1,6 +1,6 @@
-gnash (0.8.11~git20160608-1.4ubuntu1) UNRELEASED; urgency=medium
+gnash (0.8.11~git20160608-1.4tinatos1) unstable; urgency=medium
 
-  * Just gets a build going, basically
+  * Just gets a build going, basically. Probably has real problems.
 
  -- J. Dorian Greyson L. <greysondn@gmail.com>  Fri, 12 Jul 2019 03:51:38 -0400
 
