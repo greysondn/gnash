@@ -1,4 +1,11 @@
-gnash (gnash_0.8.11~git20160608-1.4tinatos2) bionic; urgency=medium
+gnash (0.8.11~git20160608-1.4tinatos3) UNRELEASED; urgency=medium
+
+  * Building out the entire complex now because apparently it doesn't like
+    requirements the way it's been built out.
+
+ -- J. Dorian Greyson L. <greysondn@gmail.com>  Sat, 13 Jul 2019 19:54:44 -0400
+
+gnash (0.8.11~git20160608-1.4tinatos2) bionic; urgency=medium
 
   * Fix a bad requirement, sorry it wouldn't install before
   * Simplify build a bit, will start axing build requirements in the future
