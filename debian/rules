@@ -103,8 +103,8 @@ override_dh_auto_install: $(GENERATED)
 	$(MAKE) -C $(OBJDIR) install DESTDIR=$(CURDIR)/debian/tmp
 	$(MAKE) -C $(OBJDIR) install-plugins DESTDIR=$(CURDIR)/debian/tmp
 
-	# dh_buildinfo output only in gnash-common
-	dh_buildinfo -pgnash-common
+	# dh_buildinfo output in our package, I suppose
+	dh_buildinfo -psdl-gnash
 
 	dh_lintian
 
@@ -126,13 +126,13 @@ endif
 	sed -i 's/images\/rtmp.png/\/usr\/share\/doc\/gnash-common\/images\/rtmp.png/' \
 		debian/tmp/usr/share/info/gnash_ref.info
 
-override_dh_strip:
-	dh_strip --dbg-package=gnash-dbg
+# override_dh_strip:
+#	dh_strip --dbg-package=gnash-dbg
 
-override_dh_gencontrol:
-	dh_gencontrol -Nswfdec-gnome
-	# add epoch to swfdec-gnome for transition
-	dh_gencontrol -pswfdec-gnome -- -v1:$(MAIN_VERSION)
+# override_dh_gencontrol:
+# 	dh_gencontrol -Nswfdec-gnome
+# 	# add epoch to swfdec-gnome for transition
+# 	dh_gencontrol -pswfdec-gnome -- -v1:$(MAIN_VERSION)
 
 override_dh_makeshlibs:
 	dh_makeshlibs -n
