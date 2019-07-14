@@ -1,7 +1,9 @@
-gnash (0.8.11~git20160608-1.4tinatos3) UNRELEASED; urgency=medium
+gnash (0.8.11~git20160608-1.4tinatos3) bionic; urgency=medium
 
-  * Building out the entire complex now because apparently it doesn't like
-    requirements the way it's been built out.
+  * I wrote the man page substitution backwards. I changed my mind, I don't
+    got this.
+  * Also with that substitution in from the base package I think we don't need
+    gnash's gtk build anymore. One way to find out I guess. Try this.
 
  -- J. Dorian Greyson L. <greysondn@gmail.com>  Sat, 13 Jul 2019 19:54:44 -0400
 
