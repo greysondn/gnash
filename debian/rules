@@ -104,8 +104,8 @@ override_dh_auto_install: $(GENERATED)
 
 	dh_lintian
 
-	sed -i -e '/^Icon/s/klash/gnash/' -e '$$aNoDisplay=true' \
-		debian/tmp/usr/share/applications/*.desktop
+	# sed -i -e '/^Icon/s/klash/gnash/' -e '$$aNoDisplay=true' \
+	#	debian/tmp/usr/share/applications/*.desktop
 
 	printf "\n == LIST OF FILES =============================================== \n\n"
 	cd $(CURDIR)/debian/tmp && find
