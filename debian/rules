@@ -43,7 +43,7 @@ CONFIGURE_FLAGS = \
 		--disable-rpath \
                 --disable-plugins \
 		--enable-media=ffmpeg \
-		--enable-gui=gtk,sdl \
+		--enable-gui=sdl \
 		--enable-renderer=agg,cairo \
 		--enable-extensions=fileio,lirc,mysql \
 		--enable-shared=yes \
